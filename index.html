@@ -15,6 +15,9 @@
     <!-- import style.css -->
     <link rel="stylesheet" href="style.css">
 
+    <!-- Import plotly -->
+    <script src="plotly-2.20.0.min.js"></script>
+
     <title>Document</title>
 </head>
 <body>
@@ -30,9 +33,10 @@
             <input id="address" type="text" placeholder="Enter an Address">
             <button id="search">OK</button>
 
-            <div id="summary">
-            </div>
-            <div id="complaints"></div>
+            <div id="summary"></div>
+
+            <div class="graph" id="crime"></div>
+            <div class="graph" id="collusions"></div>
 
         </div>
 
