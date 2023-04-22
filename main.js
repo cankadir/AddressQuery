@@ -18,6 +18,12 @@ function plot_crime( lat, lon){
 
     let response_crime = axios.get(arr_url)
         .then(function (response_crime) {
+
+            // select id 311-container and add h4
+            let crime_container = document.getElementById("crime-container")
+            crime_container.innerHTML = '<h4>Arrest Records</h4><p class="explain">Arrests since 2017 in 1000m.</p>'
+
+
             let crime = response_crime.data
 
             let traces = [];
@@ -57,21 +63,11 @@ function plot_crime( lat, lon){
                 autosize: true,
                 showlegend: false,
                 height: 150,
-                title: {
-                    text:'Arrests with in 1000m.',
-                    font: {
-                      family: 'Arial, sans-serif',
-                      weight: 800,
-                      size: 14
-                    },
-                    xref: 'paper',
-                    x: 0,
-                  },
                 margin: {
                   l: 25,
-                  r: 0,
+                  r: 5,
                   b: 25,
-                  t: 25,
+                  t: 15,
                   pad: 0
                 },
                 paper_bgcolor: 'white',
@@ -110,7 +106,7 @@ function plot_311( lat, lon ){
             let top5 = sortable.slice(0, 5)
 
             let summary = document.getElementById("summary")
-            summary.innerHTML = '<h4 id="top">Top 5 Complaints</h4>'
+            summary.innerHTML = '<h4 id="top">Top 5 311 Complaints</h4><p class="explain">311 complaints submitted since 2017</p>'
 
             for (let i = 0; i < top5.length; i++) {
                 summary.innerHTML += `${top5[i][0]}: ${top5[i][1]}<br>`
@@ -168,12 +164,13 @@ function map_pluto(lat, lon){
                 }).addTo(map);
                 // add a popup to the marker
 
-                circle.bindPopup(`<b>${lot.address}</b><br><br>Land Use: ${lot.landuse}<br>Year Built: ${lot.yearbuilt}<br>Alteration 1: ${lot.yearalter1}<br>Alteration 2: ${lot.yearalter2}<br>Residential Area: ${numberWithCommas(round(lot.resarea,2))}<br>Building Area: ${round(lot.bldgarea,2)}<br>FAR: ${round(lot.residfar,2)}<br>Built FAR: ${round(lot.builtfar,2)}<br>Units: ${lot.unitsres}<br>School Dist: ${lot.schooldist}<br>Assesed Values: $${round(lot.assesstot,0)}`);
+                circle.bindPopup(`<b>${lot.address}</b><hr><span id="hover-info"><br><br>Land Use: ${lot.landuse}<br>Year Built: ${lot.yearbuilt}<br>Alteration 1: ${lot.yearalter1}<br>Alteration 2: ${lot.yearalter2}<br>Residential Area: ${numberWithCommas(round(lot.resarea,2))}<br>Building Area: ${round(lot.bldgarea,2)}<br>FAR: ${round(lot.residfar,2)}<br>Built FAR: ${round(lot.builtfar,2)}<br>Units: ${lot.unitsres}<br>School Dist: ${lot.schooldist}<br>Assesed Values: $${round(lot.assesstot,0)}</span>`);
             }
         });
 }
 
 function plot_collusions( lat, lon ){
+
 
     select = '&$select=date_extract_y(crash_date) as year,SUM(number_of_persons_injured) as injured, SUM(number_of_persons_killed) as killed, SUM(number_of_pedestrians_injured) as ped_injured, SUM(number_of_pedestrians_killed) as ped_killed, SUM(number_of_cyclist_injured) as cyclist_injured, SUM(number_of_cyclist_killed) as cyclist_killed, SUM(number_of_motorist_injured) as motorist_injured, SUM(number_of_motorist_killed) as motorist_killed'
     groupby = '&$group=year'
@@ -181,6 +178,11 @@ function plot_collusions( lat, lon ){
 
     let response_collusions = axios.get(collusions)
     response_collusions.then(function (response_collusions) {
+
+        //  select id collusion-container, add h4 and p
+        let collusion_container = document.getElementById("collusion-container")
+        collusion_container.innerHTML = '<h4 id="top">Collusions</h4><p class="explain">Collusions reported since 2012</p>'
+
         let collusion_data = response_collusions.data
         console.log( collusion_data );
 
@@ -209,21 +211,11 @@ function plot_collusions( lat, lon ){
             showlegend: false,
             height: 150,
             hovermode: 'x unified',
-            title: {
-                text:'Vehicle Collusions with in 1000m.',
-                font: {
-                  family: 'Arial, sans-serif',
-                  weight: 800,
-                  size: 14
-                },
-                xref: 'paper',
-                x: 0,
-              },
             margin: {
               l: 25,
-              r: 0,
+              r: 5,
               b: 25,
-              t: 25,
+              t: 15,
               pad: 0
             },
             paper_bgcolor: 'white',
@@ -238,6 +230,11 @@ function plot_collusions( lat, lon ){
 
 // import leaflet and initialte a map
 var map = L.map('map');
+
+L.control.zoom({
+    position: 'topright'
+}).addTo(map);
+
 // set map view to NYC
 map.setView([40.7128, -74.0060], 13);
 // set max zoom

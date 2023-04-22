@@ -17,26 +17,34 @@
 
     <!-- Import plotly -->
     <script src="plotly-2.20.0.min.js"></script>
-
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <title>Address Query</title>
 </head>
 <body>
     
     <div class="container">
         <div id="charts">
             <div class="title">
-                <h2>Find 311 Complaints</h2>
-                <p>311 requests 250m around requested address since 2022. Only 250 complaints are returned ordered by complaint date.</p>
-
+                <h2>Address Query</h2>
+                <p class = 'info' >Search for an address to learn about buildings records, 311 complaints, accidents and arrest in the near vicinity</p>
             </div>
-            <p>Search Address</p>
-            <input id="address" type="text" placeholder="Enter an Address">
-            <button id="search">OK</button>
 
-            <div id="summary"></div>
+            <div id="input">
+                <input id="address" type="text" placeholder="Enter an Address">
+                <button id="search">OK</button>
+            </div>
 
-            <div class="graph" id="crime"></div>
-            <div class="graph" id="collusions"></div>
+            <div class="element" id="summary"></div>
+
+            <div id="crime-container"></div>
+            <div class="element graph" id="crime"></div>
+            
+            <div id="collusion-container"></div>
+            <div class="element graph" id="collusions"></div>
+            
 
         </div>
 
