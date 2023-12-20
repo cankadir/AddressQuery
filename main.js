@@ -164,7 +164,7 @@ function map_pluto(lat, lon){
                 }).addTo(map);
                 // add a popup to the marker
 
-                circle.bindPopup(`<b>${lot.address}</b><hr><span id="hover-info"><br><br>Land Use: ${lot.landuse}<br>Year Built: ${lot.yearbuilt}<br>Alteration 1: ${lot.yearalter1}<br>Alteration 2: ${lot.yearalter2}<br>Residential Area: ${numberWithCommas(round(lot.resarea,2))}<br>Building Area: ${round(lot.bldgarea,2)}<br>FAR: ${round(lot.residfar,2)}<br>Built FAR: ${round(lot.builtfar,2)}<br>Units: ${lot.unitsres}<br>School Dist: ${lot.schooldist}<br>Assesed Values: $${round(lot.assesstot,0)}</span>`);
+                circle.bindPopup(`<b>${lot.address}</b><hr><span id="hover-info">Land Use: ${lot.landuse}<br>Year Built: ${lot.yearbuilt}<br>Alteration 1: ${lot.yearalter1}<br>Alteration 2: ${lot.yearalter2}<br>Residential Area: ${numberWithCommas(round(lot.resarea,2))}<br>Building Area: ${round(lot.bldgarea,2)}<br>FAR: ${round(lot.residfar,2)}<br>Built FAR: ${round(lot.builtfar,2)}<br>Units: ${lot.unitsres}<br>School Dist: ${lot.schooldist}<br>Assesed Values: $${round(lot.assesstot,0)}</span>`);
             }
         });
 }
